@@ -9,4 +9,4 @@
 
 ## Result
 
-A 50 mb JPG file with a size of 15,000 x 4200 pixels and a size of 60 mb was reduced to 40 kb with the above settings. The thumbnail version was also reduced to 6 kb.
+A 50 mb JPG file with a size of 15,000 x 4200 pixels and a size of 60 mb was reduced to 28 kb (900x900 px). The thumbnail version was also reduced to 4 kb (300x300 px).

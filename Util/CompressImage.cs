@@ -1,4 +1,4 @@
-using SixLabors.ImageSharp.Formats.Jpeg;
+using SixLabors.ImageSharp.Formats.Webp;
 
 namespace ImageCompressApi.Util
 {
@@ -6,12 +6,14 @@ namespace ImageCompressApi.Util
     {
         public static void Compress(
             Stream srcImgStream,
-            string targetPath,
+            string fullFileName,
             int quality,
             int maxWidth,
             int maxHeight
         )
         {
+            var extension = Path.GetExtension(fullFileName).ToLower();
+
             srcImgStream.Position = 0;
 
             using var image = Image.Load(srcImgStream);
@@ -24,17 +26,16 @@ namespace ImageCompressApi.Util
             int newHeight = (int)(image.Height * ratio);
 
             image.Mutate(x => x.Resize(newWidth, newHeight));
-            var extension = Path.GetExtension(targetPath).ToLower();
 
-            if (extension == ".jpg" || extension == ".jpeg")
+            if (extension == ".webp")
             {
-                image.Save(targetPath, new JpegEncoder { Quality = quality });
+                image.Save(fullFileName, new WebpEncoder { Quality = quality });
             }
             else
             {
-                // Convert to JPG
-                targetPath = Path.ChangeExtension(targetPath, ".jpg");
-                image.Save(targetPath, new JpegEncoder { Quality = quality });
+                // Convert to Webp
+                fullFileName = Path.ChangeExtension(fullFileName, ".webp");
+                image.Save(fullFileName, new WebpEncoder { Quality = quality });
             }
         }
     }
