@@ -2,11 +2,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.WebHost.UseKestrel(options =>
 {
-    options.ListenAnyIP(7042);
+    options.ListenLocalhost(7042);
     options.Limits.MaxRequestBodySize = 104857600; //100MB
 });
-
-AppContext.SetSwitch("System.Drawing.EnableUnixSupport", true); // System.Drawing sadece windowsta çalışıyor, linux desteği için
 
 // Add services to the container.
 
